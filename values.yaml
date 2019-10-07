@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  tag: stable
+  repository: eu.gcr.io/uctoservis/grav
+  tag: latest
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -23,7 +23,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   paths: []
   hosts:
-    - chart-example.local
+    - uctoservis.test.biibtech.com
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

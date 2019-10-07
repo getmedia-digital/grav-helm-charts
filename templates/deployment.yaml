@@ -37,11 +37,15 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - mountPath: /var/www/html/user
+            name: grav-data
+            subPath: grav
       {{- with .Values.nodeSelector }}
       volumes:
       - name: grav-data
         persistentVolumeClaim:
-          claimName: 
+          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "grav-helm-charts.fullname" . }}-grav{{- end }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
